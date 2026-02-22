@@ -17,7 +17,7 @@ body {
 
 /* normal page content sits in the grid */
 .page {
-    grid-area:1/1;
+    grid-area: 1/1;
     padding: 1rem;
 }
 
@@ -34,7 +34,7 @@ body {
 
 /* ---------- overlay that covers the whole viewport using grid ---------- */
 .overlay {
-    grid-area:1/1;
+    grid-area: 1/1;
     /* span all rows of body grid */
     display: grid;
     place-items: center;
