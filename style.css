@@ -1,0 +1,106 @@
+/* minimal reset */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    min-height: 100vh;
+    /* ensures grid covers viewport */
+    overflow: hidden;
+}
+
+/* normal page content sits in the grid */
+.page {
+    grid-area:1/1;
+    padding: 1rem;
+}
+
+/* gallery layout (inside page) */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+
+/* ---------- overlay that covers the whole viewport using grid ---------- */
+.overlay {
+    grid-area:1/1;
+    /* span all rows of body grid */
+    display: grid;
+    place-items: center;
+    /* center inner content */
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 50;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 600ms ease, visibility 0s linear 200ms;
+}
+
+/* visible state */
+.overlay.open {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 200ms;
+}
+
+/* inner wrapper to control iframe size */
+.overlay-inner {
+    width: 80vw;
+    height: 80vh;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* iframe fills viewport (like inset:0) */
+.overlay-inner iframe {
+    grid-area: 1/1;
+    border: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* close button */
+.overlay-close {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 0.6rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.item {
+    display: grid;
+    border-radius: 1em;
+}
+
+.item iframe {
+    grid-area: 1 / 1;
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 1em;
+}
+
+.click-catcher {
+    grid-area: 1 / 1;
+    order: 1;
+    color: white;
+    font-size: large;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    background: linear-gradient(to top, rgba(138, 133, 133, 0.7), transparent);
+}
